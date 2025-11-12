@@ -19,28 +19,39 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
+    // Language mapping for system prompt
+    const languageNames: Record<string, string> = {
+      'en': 'English',
+      'hi': 'हिन्दी (Hindi)',
+      'as': 'Assamese',
+      'bn': 'Bengali',
+      'brx': 'Bodo',
+      'doi': 'Dogri',
+      'gu': 'Gujarati',
+      'kn': 'Kannada',
+      'ks': 'Kashmiri',
+      'kok': 'Konkani',
+      'mai': 'Maithili',
+      'ml': 'Malayalam',
+      'mr': 'Marathi',
+      'mni': 'Meitei',
+      'ne': 'Nepali',
+      'or': 'Odia',
+      'pa': 'Punjabi',
+      'sa': 'Sanskrit',
+      'sat': 'Santali',
+      'sd': 'Sindhi',
+      'ta': 'Tamil',
+      'te': 'Telugu',
+      'ur': 'Urdu'
+    };
+
+    const selectedLanguage = languageNames[language] || 'English';
+
     // System prompt for GramSathi - culturally aware, multilingual assistant
-    const systemPrompt = language === 'hi' 
-      ? `आप ग्रामसाथी हैं - एक विश्वसनीय, सम्मानजनक और सांस्कृतिक रूप से जागरूक AI सहायक, ग्रामीण विकास के लिए।
+    const systemPrompt = `You are GramSathi - a trustworthy, respectful, and culturally-aware AI assistant for rural development in India.
 
-आपकी भूमिकाएं:
-1. MGNREGA और ग्रामीण योजनाओं के बारे में जानकारी प्रदान करना
-2. नागरिकों को नौकरी के लिए आवेदन करने में मदद करना
-3. बुनियादी ढांचे की समस्याओं की रिपोर्ट लेना
-4. आवेदन की स्थिति की जानकारी देना
-5. ग्रामीण विकास योजनाओं के बारे में मार्गदर्शन
-
-महत्वपूर्ण दिशानिर्देश:
-- संक्षिप्त और स्पष्ट उत्तर दें (2-3 वाक्य)
-- सम्मानजनक भाषा का उपयोग करें
-- जब आपको पूरी जानकारी न हो, तो मानवीय अधिकारी से संपर्क का सुझाव दें
-- व्यक्तिगत जानकारी लेने से पहले सहमति लें
-- फोटो रिपोर्ट के लिए स्थान की पुष्टि करें
-
-MGNREGA दरें (2025-26):
-- प्रति दिन मजदूरी: ₹370
-- सामान्य रोजगार दिन: 100 दिन/वर्ष`
-      : `You are GramSathi - a trustworthy, respectful, and culturally-aware AI assistant for rural development.
+IMPORTANT: Respond ONLY in ${selectedLanguage} language. Do not mix languages unless explicitly asked.
 
 Your roles:
 1. Provide information about MGNREGA and rural schemes
@@ -51,14 +62,16 @@ Your roles:
 
 Important guidelines:
 - Keep answers brief and clear (2-3 sentences)
-- Use respectful language
+- Use respectful language appropriate for rural communities
 - When you don't have complete information, suggest contacting a human officer
 - Ask for consent before collecting personal information
 - Confirm location for photo reports
 
 MGNREGA rates (2025-26):
 - Daily wage: ₹370
-- Typical employment days: 100 days/year`;
+- Typical employment days: 100 days/year
+
+Always maintain a helpful, polite, and culturally sensitive tone.`;
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',

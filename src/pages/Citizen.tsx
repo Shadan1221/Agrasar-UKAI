@@ -3,10 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MapPin, MessageSquare, FileText, Camera, Send, Mic } from "lucide-react";
+import { MapPin, MessageSquare, FileText, Camera, Send, Mic, Languages } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Message {
   id: string;
@@ -27,6 +34,33 @@ const Citizen = () => {
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
+  const [language, setLanguage] = useState('en');
+
+  const languages = [
+    { code: "en", name: "English" },
+    { code: "hi", name: "हिन्दी (Hindi)" },
+    { code: "as", name: "অসমীয়া (Assamese)" },
+    { code: "bn", name: "বাংলা (Bengali)" },
+    { code: "brx", name: "बड़ो (Bodo)" },
+    { code: "doi", name: "डोगरी (Dogri)" },
+    { code: "gu", name: "ગુજરાતી (Gujarati)" },
+    { code: "kn", name: "ಕನ್ನಡ (Kannada)" },
+    { code: "ks", name: "कॉशुर (Kashmiri)" },
+    { code: "kok", name: "कोंकणी (Konkani)" },
+    { code: "mai", name: "मैथिली (Maithili)" },
+    { code: "ml", name: "മലയാളം (Malayalam)" },
+    { code: "mr", name: "मराठी (Marathi)" },
+    { code: "mni", name: "মৈতৈলোন্ (Meitei)" },
+    { code: "ne", name: "नेपाली (Nepali)" },
+    { code: "or", name: "ଓଡ଼ିଆ (Odia)" },
+    { code: "pa", name: "ਪੰਜਾਬੀ (Punjabi)" },
+    { code: "sa", name: "संस्कृतम् (Sanskrit)" },
+    { code: "sat", name: "ᱥᱟᱱᱛᱟᱲᱤ (Santali)" },
+    { code: "sd", name: "سنڌي (Sindhi)" },
+    { code: "ta", name: "தமிழ் (Tamil)" },
+    { code: "te", name: "తెలుగు (Telugu)" },
+    { code: "ur", name: "اردو (Urdu)" }
+  ];
 
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
@@ -53,7 +87,7 @@ const Citizen = () => {
             role: m.role,
             content: m.content
           })).concat([{ role: 'user', content: inputMessage }]),
-          language: 'en'
+          language: language
         })
       });
 
@@ -95,16 +129,29 @@ const Citizen = () => {
             <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center">
               <MessageSquare className="h-6 w-6 text-accent-foreground" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground">ग्रामसाथी / GramSathi</h1>
-              <p className="text-xs text-muted-foreground">Your Rural Assistant</p>
-            </div>
+          <div>
+            <h1 className="text-xl font-bold text-foreground">ग्रामसाथी / GramSathi</h1>
+            <p className="text-xs text-muted-foreground">Your Rural Assistant</p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={() => navigate('/')}>
-              Back to Home
-            </Button>
-          </div>
+        </div>
+        <div className="flex gap-2">
+          <Select value={language} onValueChange={setLanguage}>
+            <SelectTrigger className="w-[200px] bg-background">
+              <Languages className="w-4 h-4 mr-2" />
+              <SelectValue placeholder="Select Language" />
+            </SelectTrigger>
+            <SelectContent className="bg-background border-border max-h-[300px] z-50">
+              {languages.map((lang) => (
+                <SelectItem key={lang.code} value={lang.code} className="cursor-pointer">
+                  {lang.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Button variant="outline" size="sm" onClick={() => navigate('/')}>
+            Back to Home
+          </Button>
+        </div>
         </div>
       </header>
 
