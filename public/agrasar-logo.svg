@@ -1,0 +1,40 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark green square background -->
+  <rect width="200" height="200" fill="#1F4F2E" rx="8"/>
+  
+  <!-- Circular emblem with thick off-white border -->
+  <g transform="translate(100, 100)">
+    <!-- Outer circle - thick border -->
+    <circle cx="0" cy="0" r="80" fill="#F6F1E7" stroke="#F6F1E7" stroke-width="12"/>
+    
+    <!-- Inner circle - sky background -->
+    <circle cx="0" cy="0" r="68" fill="#F6F1E7"/>
+    
+    <!-- Hills and fields - dark green landscape -->
+    <path d="M -68 20 Q -40 -10, -20 10 Q 0 0, 20 10 Q 40 -5, 68 20 L 68 68 L -68 68 Z" fill="#1F4F2E"/>
+    
+    <!-- Field stripes - curved off-white lines -->
+    <g opacity="0.3">
+      <path d="M -68 30 Q -40 0, -20 20 Q 0 10, 20 20 Q 40 5, 68 30" stroke="#F6F1E7" stroke-width="1.5" fill="none"/>
+      <path d="M -68 40 Q -40 10, -20 30 Q 0 20, 20 30 Q 40 15, 68 40" stroke="#F6F1E7" stroke-width="1.5" fill="none"/>
+      <path d="M -68 50 Q -40 20, -20 40 Q 0 30, 20 40 Q 40 25, 68 50" stroke="#F6F1E7" stroke-width="1.5" fill="none"/>
+      <path d="M -68 60 Q -40 30, -20 50 Q 0 40, 20 50 Q 40 35, 68 60" stroke="#F6F1E7" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Tree on left - dark green canopy, off-white trunk -->
+    <circle cx="-25" cy="15" r="8" fill="#1F4F2E"/>
+    <rect x="-27" y="20" width="4" height="6" fill="#F6F1E7" rx="1"/>
+    
+    <!-- House on right - terracotta with off-white windows/door -->
+    <rect x="15" y="5" width="18" height="15" fill="#C46A34" rx="1"/>
+    <!-- Roof -->
+    <path d="M 15 5 L 24 0 L 33 5 Z" fill="#B85A24"/>
+    <!-- Door -->
+    <rect x="20" y="12" width="4" height="8" fill="#F6F1E7" rx="0.5"/>
+    <!-- Window front -->
+    <rect x="26" y="10" width="3" height="3" fill="#F6F1E7" rx="0.3"/>
+    <!-- Window side -->
+    <rect x="30" y="8" width="2" height="2" fill="#F6F1E7" rx="0.2"/>
+  </g>
+</svg>
+

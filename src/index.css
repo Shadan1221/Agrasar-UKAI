@@ -8,77 +8,80 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Warm earth background tones */
-    --background: 42 47% 97%;
-    --foreground: 243 45% 20%;
+    /* Agrasar Color Scheme - Derived from Logo Images */
+    /* Soft Beige background - rural, organic feel */
+    --background: 40 50% 90%; /* #F3E9D7 - soft beige */
+    --foreground: 25 48% 24%; /* #5A381F - earth brown for text */
 
-    /* Card with subtle warmth */
-    --card: 0 0% 100%;
-    --card-foreground: 243 45% 20%;
+    /* Neutral Cream card background */
+    --card: 40 40% 95%; /* #F6F1E7 - neutral cream */
+    --card-foreground: 25 48% 24%; /* earth brown */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 243 45% 20%;
+    --popover: 40 40% 95%;
+    --popover-foreground: 25 48% 24%;
 
-    /* Saffron/Orange primary - warm, trustworthy */
-    --primary: 38 92% 50%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary Green - Deep farmland green from logo */
+    --primary: 145 44% 21%; /* #1F4F2E - primary green */
+    --primary-foreground: 40 40% 95%; /* cream text on green */
 
-    /* Deep Indigo secondary - authority */
-    --secondary: 243 75% 40%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary Terracotta - Earth orange from house in logo */
+    --secondary: 20 60% 49%; /* #C46A34 - terracotta orange */
+    --secondary-foreground: 0 0% 100%; /* white text on terracotta */
 
     /* Muted earth tones */
-    --muted: 42 30% 90%;
-    --muted-foreground: 243 20% 45%;
+    --muted: 40 30% 88%;
+    --muted-foreground: 25 30% 40%;
 
-    /* Green accent for success/nature */
-    --accent: 142 76% 36%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Deep green for citizen portal */
+    --accent: 145 44% 21%; /* same as primary green */
+    --accent-foreground: 0 0% 100%; /* white text */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 42 20% 88%;
-    --input: 42 20% 88%;
-    --ring: 38 92% 50%;
+    /* Subtle borders in muted green/brown */
+    --border: 145 20% 75%; /* muted green border */
+    --input: 145 20% 75%;
+    --ring: 145 44% 21%; /* green focus ring */
 
-    --radius: 0.75rem;
+    --radius: 1rem; /* 16px rounded corners */
 
-    /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(38 92% 60%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(42 47% 98%) 100%);
-    --shadow-soft: 0 4px 20px -2px hsl(243 45% 20% / 0.08);
-    --shadow-card: 0 8px 30px -4px hsl(243 45% 20% / 0.12);
+    /* Custom gradients - subtle and warm */
+    --gradient-hero: linear-gradient(135deg, hsl(20 60% 49%) 0%, hsl(20 60% 45%) 100%); /* terracotta gradient */
+    --gradient-card: linear-gradient(180deg, hsl(40 40% 95%) 0%, hsl(40 50% 92%) 100%);
+    --shadow-soft: 0 4px 20px -2px hsl(25 48% 20% / 0.06); /* very subtle shadow */
+    --shadow-card: 0 8px 30px -4px hsl(25 48% 20% / 0.08); /* gentle card shadow */
   }
 
   .dark {
-    --background: 243 45% 8%;
-    --foreground: 42 30% 95%;
+    /* Dark mode - keeping warm, rural feel */
+    --background: 25 30% 12%;
+    --foreground: 40 30% 90%;
 
-    --card: 243 40% 12%;
-    --card-foreground: 42 30% 95%;
+    --card: 25 25% 15%;
+    --card-foreground: 40 30% 90%;
 
-    --popover: 243 40% 12%;
-    --popover-foreground: 42 30% 95%;
+    --popover: 25 25% 15%;
+    --popover-foreground: 40 30% 90%;
 
-    --primary: 38 92% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 145 44% 35%; /* lighter green for dark mode */
+    --primary-foreground: 40 40% 95%;
 
-    --secondary: 243 75% 50%;
+    --secondary: 20 60% 55%; /* lighter terracotta */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 243 30% 18%;
-    --muted-foreground: 42 20% 65%;
+    --muted: 25 20% 20%;
+    --muted-foreground: 40 20% 70%;
 
-    --accent: 142 76% 40%;
+    --accent: 145 44% 35%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 243 30% 18%;
-    --input: 243 30% 18%;
-    --ring: 38 92% 50%;
+    --border: 145 20% 25%;
+    --input: 145 20% 25%;
+    --ring: 145 44% 35%;
   }
 }
 
@@ -89,5 +92,21 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    /* Subtle texture for rural, organic feel */
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(90, 56, 31, 0.02) 1px, transparent 0);
+    background-size: 20px 20px;
+    font-family: 'Inter', 'Nunito', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Typography - elegant and human-friendly */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    font-weight: 400;
+    line-height: 1.6;
   }
 }

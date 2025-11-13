@@ -317,21 +317,21 @@ const Citizen = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
+      {/* Header - Mobile-friendly */}
       <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center">
-              <MessageSquare className="h-6 w-6 text-accent-foreground" />
+        <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3 w-full md:w-auto justify-center md:justify-start">
+            <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center">
+              <MessageSquare className="h-6 w-6 text-primary-foreground" />
             </div>
-            <div>
+            <div className="text-center md:text-left">
               <h1 className="text-xl font-bold text-foreground">{getTranslation('header.title', language)}</h1>
               <p className="text-xs text-muted-foreground">{getTranslation('header.subtitle', language)}</p>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full md:w-auto justify-center md:justify-end">
             <Select value={language} onValueChange={(value) => handleLanguageChange(value as LanguageCode)}>
-              <SelectTrigger className="w-[200px] bg-background">
+              <SelectTrigger className="w-full md:w-[200px] bg-background">
                 <Languages className="h-4 w-4 mr-2" />
                 <SelectValue placeholder={getTranslation('header.selectLanguage', language)} />
               </SelectTrigger>
@@ -343,22 +343,22 @@ const Citizen = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Button variant="outline" size="sm" onClick={() => navigate('/')}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/')} className="w-full md:w-auto">
               {getTranslation('header.backToHome', language)}
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="flex-1 container mx-auto px-4 py-6 flex flex-col gap-6">
-        {/* Quick Actions */}
-        <div className="grid grid-cols-3 gap-3">
+      {/* Main Content - Mobile-friendly centered layout */}
+      <div className="flex-1 container mx-auto px-4 py-6 flex flex-col gap-6 max-w-4xl">
+        {/* Quick Actions - Mobile responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <Dialog open={isJobDialogOpen} onOpenChange={setIsJobDialogOpen}>
             <DialogTrigger asChild>
-              <Card className="cursor-pointer hover:shadow-card transition-shadow">
+              <Card className="cursor-pointer hover:shadow-card transition-shadow w-full">
                 <CardContent className="p-4 text-center">
-                  <FileText className="h-6 w-6 text-accent mx-auto mb-2" />
+                  <FileText className="h-6 w-6 text-primary mx-auto mb-2" />
                   <p className="text-sm font-medium text-foreground">{getTranslation('actions.applyForJob', language)}</p>
                 </CardContent>
               </Card>
@@ -475,9 +475,9 @@ const Citizen = () => {
 
           <Dialog open={isIssueDialogOpen} onOpenChange={setIsIssueDialogOpen}>
             <DialogTrigger asChild>
-              <Card className="cursor-pointer hover:shadow-card transition-shadow">
+              <Card className="cursor-pointer hover:shadow-card transition-shadow w-full">
                 <CardContent className="p-4 text-center">
-                  <Camera className="h-6 w-6 text-accent mx-auto mb-2" />
+                  <Camera className="h-6 w-6 text-primary mx-auto mb-2" />
                   <p className="text-sm font-medium text-foreground">{getTranslation('actions.reportIssue', language)}</p>
                 </CardContent>
               </Card>
@@ -573,9 +573,9 @@ const Citizen = () => {
 
           <Dialog open={isSchemesDialogOpen} onOpenChange={setIsSchemesDialogOpen}>
             <DialogTrigger asChild>
-              <Card className="cursor-pointer hover:shadow-card transition-shadow">
+              <Card className="cursor-pointer hover:shadow-card transition-shadow w-full">
                 <CardContent className="p-4 text-center">
-                  <MapPin className="h-6 w-6 text-accent mx-auto mb-2" />
+                  <MapPin className="h-6 w-6 text-primary mx-auto mb-2" />
                   <p className="text-sm font-medium text-foreground">{getTranslation('actions.findSchemes', language)}</p>
                 </CardContent>
               </Card>
@@ -653,11 +653,11 @@ const Citizen = () => {
           </Dialog>
         </div>
 
-        {/* Chat Interface */}
-        <Card className="flex-1 flex flex-col shadow-card">
+        {/* Chat Interface - Mobile-friendly */}
+        <Card className="flex-1 flex flex-col shadow-card rounded-xl">
           <CardHeader className="border-b border-border">
-            <CardTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-accent" />
+            <CardTitle className="flex items-center gap-2 justify-center md:justify-start text-center md:text-left">
+              <MessageSquare className="h-5 w-5 text-primary" />
               {getTranslation('chat.title', language)}
             </CardTitle>
           </CardHeader>
@@ -670,7 +670,7 @@ const Citizen = () => {
                   className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                    className={`max-w-[85%] md:max-w-[80%] rounded-2xl px-4 py-3 ${
                       message.role === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-foreground'
@@ -687,11 +687,11 @@ const Citizen = () => {
           </ScrollArea>
 
           <div className="border-t border-border p-4">
-            <div className="flex gap-2">
-              <Button variant="outline" size="icon">
+            <div className="flex gap-2 items-center">
+              <Button variant="outline" size="icon" className="flex-shrink-0">
                 <Camera className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="flex-shrink-0">
                 <Mic className="h-4 w-4" />
               </Button>
               <Input
@@ -699,18 +699,18 @@ const Citizen = () => {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1"
+                className="flex-1 min-w-0"
               />
-              <Button onClick={handleSendMessage} className="bg-gradient-hero">
+              <Button onClick={handleSendMessage} className="bg-primary hover:bg-primary/90 text-primary-foreground flex-shrink-0">
                 <Send className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </Card>
 
-        {/* Info Section */}
-        <Card className="bg-accent/5 border-accent/20">
-          <CardContent className="p-4">
+        {/* Info Section - Mobile-friendly */}
+        <Card className="bg-primary/5 border-primary/20 rounded-xl">
+          <CardContent className="p-4 text-center md:text-left">
             <p className="text-sm text-muted-foreground">
               <strong>{getTranslation('info.availableIn', language)}:</strong> हिंदी, English, Garhwali, Kumaoni, and 20+ Indian languages
               <br />
