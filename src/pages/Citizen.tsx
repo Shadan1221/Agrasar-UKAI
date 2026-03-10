@@ -91,18 +91,15 @@ const Citizen = () => {
     }
   });
 
-  const { data: schemes } = useQuery({
-    queryKey: ['schemes'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('schemes')
-        .select('*')
-        .eq('status', 'Active')
-        .order('name');
-      if (error) throw error;
-      return data;
-    }
-  });
+  const mockSchemes = [
+    { id: 'S001', name: 'MGNREGA', category: 'Employment', description: 'Mahatma Gandhi National Rural Employment Guarantee Act - provides 100 days of wage employment per year to rural households.', eligibility_criteria: 'Adult members of rural households willing to do unskilled manual work.', benefits: '100 days guaranteed employment at ₹370/day.', application_process: 'Visit Gram Panchayat office with Aadhaar and photograph.', contact_info: 'Gram Panchayat / Block Development Officer', status: 'Active' },
+    { id: 'S002', name: 'PM Awas Yojana (Gramin)', category: 'Housing', description: 'Pradhan Mantri Awas Yojana - provides financial assistance for construction of pucca houses.', eligibility_criteria: 'Homeless or living in kutcha/dilapidated houses. BPL families.', benefits: 'Up to ₹1.20 lakh in plains and ₹1.30 lakh in hilly areas.', application_process: 'Apply through Gram Panchayat or PMAY-G portal.', contact_info: 'Block Development Officer', status: 'Active' },
+    { id: 'S003', name: 'Swachh Bharat Mission (Gramin)', category: 'Sanitation', description: 'Construction of individual household toilets and community sanitary complexes.', eligibility_criteria: 'Households without access to toilets.', benefits: '₹12,000 incentive for toilet construction.', application_process: 'Contact Gram Panchayat.', contact_info: 'District Sanitation Officer', status: 'Active' },
+    { id: 'S004', name: 'PM Kisan Samman Nidhi', category: 'Agriculture', description: 'Income support of ₹6,000 per year to small and marginal farmer families.', eligibility_criteria: 'Small and marginal farmers with cultivable land.', benefits: '₹6,000/year in three equal installments.', application_process: 'Register on pmkisan.gov.in or visit CSC.', contact_info: 'Agriculture Department / CSC', status: 'Active' },
+    { id: 'S005', name: 'Jal Jeevan Mission', category: 'Water', description: 'Functional household tap connection to every rural household by 2024.', eligibility_criteria: 'All rural households.', benefits: 'Piped water supply at 55 lpcd.', application_process: 'Contact Gram Panchayat or Jal Shakti Department.', contact_info: 'Jal Shakti Department', status: 'Active' },
+  ];
+
+  const schemes = mockSchemes;
 
   const filteredSchemes = schemes?.filter(scheme =>
     scheme.name?.toLowerCase().includes(schemeSearch.toLowerCase()) ||
@@ -113,20 +110,9 @@ const Citizen = () => {
   // Mutations
   const jobApplicationMutation = useMutation({
     mutationFn: async (data: any) => {
-      const { error } = await supabase
-        .from('job_applications')
-        .insert({
-          id: `JA${Date.now()}`,
-          work_order_id: data.work_order_id || null,
-          village_id: data.village_id,
-          applicant_name: data.applicant_name,
-          applicant_mobile: data.applicant_mobile,
-          applicant_age: parseInt(data.applicant_age) || null,
-          applicant_gender: data.applicant_gender || null,
-          preferred_work_type: data.preferred_work_type || null,
-          status: 'Pending'
-        });
-      if (error) throw error;
+      // Mock: simulate job application submission
+      await new Promise(resolve => setTimeout(resolve, 500));
+      console.log('Job application submitted:', data);
     },
     onSuccess: () => {
       toast({
