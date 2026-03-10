@@ -110,20 +110,9 @@ const Citizen = () => {
   // Mutations
   const jobApplicationMutation = useMutation({
     mutationFn: async (data: any) => {
-      const { error } = await supabase
-        .from('job_applications')
-        .insert({
-          id: `JA${Date.now()}`,
-          work_order_id: data.work_order_id || null,
-          village_id: data.village_id,
-          applicant_name: data.applicant_name,
-          applicant_mobile: data.applicant_mobile,
-          applicant_age: parseInt(data.applicant_age) || null,
-          applicant_gender: data.applicant_gender || null,
-          preferred_work_type: data.preferred_work_type || null,
-          status: 'Pending'
-        });
-      if (error) throw error;
+      // Mock: simulate job application submission
+      await new Promise(resolve => setTimeout(resolve, 500));
+      console.log('Job application submitted:', data);
     },
     onSuccess: () => {
       toast({
